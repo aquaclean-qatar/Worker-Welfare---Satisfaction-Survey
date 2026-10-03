@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Welfare Accommodation Survey
+    </title>
+    <meta name="description" content="Select your language to open the Welfare Accommodation Survey." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+      :root{
+    --navy:#0F2E3D;
+    --navy-deep:#0A2029;
+    --teal:#1F6E7A;
+    --gold:#C9A227;
+    --gold-light:#E4C55E;
+    --bg:#F5F6F3;
+    --card-bg:#FFFFFF;
+    --ink:#17242C;
+    --ink-soft:#4A5A62;
+    --line:#E1E5E2;
+    --radius:18px;
+    --shadow-sm:0 2px 8px rgba(15,46,61,0.08);
+    --shadow-md:0 10px 30px rgba(15,46,61,0.14);
+    --shadow-lg:0 18px 45px rgba(15,46,61,0.22);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:&#34;Roboto&#34;, &#34;Segoe UI&#34;, &#34;Helvetica Neue&#34;, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* Decorative animated background */
+  .bg-decor{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .bg-decor::before,
+  .bg-decor::after{
+    content:&#34;&#34;;
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    opacity:0.35;
+    animation:drift 22s ease-in-out infinite;
+  }
+  .bg-decor::before{
+    width:480px;height:480px;
+    top:-160px; left:-140px;
+    background:radial-gradient(circle at 30% 30%, var(--teal), transparent 70%);
+  }
+  .bg-decor::after{
+    width:520px;height:520px;
+    bottom:-180px; right:-160px;
+    background:radial-gradient(circle at 60% 40%, var(--gold-light), transparent 70%);
+    animation-delay:-11s;
+  }
+  .bg-grid{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(rgba(15,46,61,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,46,61,0.035) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse at center, black 0%, transparent 75%);
+  }
+
+  @keyframes drift{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(30px,20px) scale(1.06); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .bg-decor::before,
+    .bg-decor::after{ animation:none; }
+  }
+
+  /* Header */
+  header{
+    position:relative;
+    z-index:1;
+    background:#FFFFFF;
+    color:var(--navy);
+    padding:18px 24px;
+    box-shadow:var(--shadow-md);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .header-logo{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:56px;
+  }
+  .header-logo img{
+    max-height:56px;
+    max-width:140px;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    display:block;
+  }
+  .header-title{
+    flex:1 1 auto;
+    text-align:center;
+  }
+  .header-title h1{
+    margin:0;
+    font-size:clamp(1.15rem, 2.6vw, 1.9rem);
+    font-weight:700;
+    letter-spacing:0.3px;
+    line-height:1.25;
+  }
+  .header-title p{
+    margin:4px 0 0;
+    font-size:clamp(0.72rem, 1.4vw, 0.9rem);
+    color:var(--teal);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  /* Main */
+  main{
+    position:relative;
+    z-index:1;
+    flex:1 1 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+  }
+  .content-wrap{
+    max-width:920px;
+    width:100%;
+  }
+  .intro{
+    text-align:center;
+    margin:0 0 28px;
+  }
+  .intro h2{
+    margin:0 0 8px;
+    font-size:clamp(1.1rem, 2.2vw, 1.5rem);
+    color:var(--navy);
+    font-weight:700;
+  }
+  .intro p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:0.98rem;
+    max-width:560px;
+    margin:0 auto;
+  }
+
+  .lang-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:30px;
+  }
+
+  .lang-card{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    text-decoration:none;
+    color:var(--ink);
+    box-shadow:var(--shadow-sm);
+    transition:transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
+    min-height:104px;
+    overflow:hidden;
+  }
+  .lang-card::before{
+    content:&#34;&#34;;
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:5px;
+    background:linear-gradient(180deg, var(--gold), var(--teal));
+    transform:scaleY(0);
+    transform-origin:bottom;
+    transition:transform 0.3s ease;
+  }
+  .lang-card:hover,
+  .lang-card:focus-visible{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-lg);
+    border-color:var(--teal);
+  }
+  .lang-card:hover::before,
+  .lang-card:focus-visible::before{
+    transform:scaleY(1);
+  }
+  .lang-card:active{
+    transform:translateY(-2px) scale(0.99);
+  }
+  .lang-card:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .lang-icon{
+    flex:0 0 auto;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--navy), var(--teal));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:0.5px;
+    flex-shrink:0;
+    transition:transform 0.3s ease;
+  }
+  .lang-card:hover .lang-icon{
+    transform:scale(1.08) rotate(-4deg);
+  }
+
+  .lang-text{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .lang-text .lang-name{
+    font-size:1.25rem;
+    font-weight:700;
+    color:var(--navy);
+  }
+  .lang-text .lang-sub{
+    font-size:0.72rem;
+    letter-spacing:1.1px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+
+  .lang-arrow{
+    margin-left:auto;
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--teal);
+    transition:transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  .lang-card:hover .lang-arrow{
+    transform:translateX(4px);
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#fff;
+  }
+
+  /* Footer */
+  footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:16px 20px 20px;
+    background:transparent;
+  }
+  .footer-row{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .footer-label{
+    font-size:0.68rem;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0;
+    font-weight:600;
+    line-height:1;
+  }
+  .footer-logo-link{
+    display:inline-block;
+    line-height:0;
+    border-radius:8px;
+  }
+  .footer-logo-link:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:4px;
+  }
+  .footer-logo-link img{
+    height:26px;
+    width:auto;
+    display:block;
+    filter:brightness(0) saturate(100%) invert(20%) sepia(25%) saturate(700%) hue-rotate(150deg) brightness(85%);
+    opacity:0.85;
+    transition:filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  .footer-logo-link:hover img,
+  .footer-logo-link:focus-visible img{
+    filter:brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(900%) hue-rotate(150deg) brightness(100%);
+    opacity:1;
+    transform:translateY(-1px);
+  }
+
+  /* Responsive */
+  @media (max-width:760px){
+    .lang-grid{
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+    .header-logo img{
+      max-height:40px;
+      max-width:90px;
+    }
+    .header-inner{
+      gap:10px;
+    }
+    main{ padding:28px 16px; }
+    .lang-card{
+      padding:20px 18px;
+      min-height:88px;
+      gap:14px;
+    }
+    .lang-icon{
+      width:46px;
+      height:46px;
+      font-size:1.15rem;
+    }
+    .lang-text .lang-name{ font-size:1.08rem; }
+  }
+
+  @media (max-width:420px){
+    .header-title p{ display:none; }
+  }
+    </style>
+  </head>
+  <body>
+    <div class="bg-decor" aria-hidden="true">
+    </div>
+    <div class="bg-grid" aria-hidden="true">
+    </div>
+    <header>
+      <div class="header-inner">
+        <div class="header-logo">
+          <img src="https://i.imgur.com/y2wOlu7.png" alt="Organization logo left" />
+        </div>
+        <div class="header-title">
+          <h1>
+            Welfare Accommodation Survey
+          </h1>
+          <p>
+            Let&#39;s Begin
+          </p>
+        </div>
+        <div class="header-logo">
+          <img src="https://i.imgur.com/Rq5mCCh.png" alt="Organization logo right" />
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="content-wrap">
+        <div class="intro">
+          <h2>
+            Please choose your preferred language
+          </h2>
+          <p>
+            Tap a language below to open the accommodation welfare survey in a new tab.
+          </p>
+        </div>
+        <div class="lang-grid" role="list" aria-label="Available survey languages">
+          <a aria-label="Open the Welfare Accommodation Survey in English" class="lang-card" href="https://www.surveymonkey.com/r/qr_code/ACCenglish" role="listitem">          <span class="lang-icon" aria-hidden="true">          EN
+</span>
+          <span class="lang-text">          <span class="lang-name">          English
+</span>
+          <span class="lang-sub">          Start Your Survey
+</span>
+</span>
+          <span class="lang-arrow" aria-hidden="true">          →
+</span>
+</a>
+          <a aria-label="Open the Welfare Accommodation Survey in Hindi" class="lang-card" href="https://www.surveymonkey.com/r/qr_code/ACChindi" role="listitem">          <span class="lang-icon" aria-hidden="true">          HI
+</span>
+          <span class="lang-text">          <span class="lang-name">          Hindi
+</span>
+          <span class="lang-sub">          अपना सर्वेक्षण शुरू करें
+</span>
+</span>
+          <span class="lang-arrow" aria-hidden="true">          →
+</span>
+</a>
+          <a aria-label="Open the Welfare Accommodation Survey in Malayalam" class="lang-card" href="https://www.surveymonkey.com/r/qr_code/ACCmalayalam" role="listitem">          <span class="lang-icon" aria-hidden="true">          ML
+</span>
+          <span class="lang-text">          <span class="lang-name">          Malayalam
+</span>
+          <span class="lang-sub">          നിങ്ങളുടെ സർവേ ആരംഭിക്കുക
+</span>
+</span>
+          <span class="lang-arrow" aria-hidden="true">          →
+</span>
+</a>
+          <a aria-label="Open the Welfare Accommodation Survey in Tagalog" class="lang-card" href="https://www.surveymonkey.com/r/qr_code/ACCtagalog" role="listitem">          <span class="lang-icon" aria-hidden="true">          TL
+</span>
+          <span class="lang-text">          <span class="lang-name">          Tagalog
+</span>
+          <span class="lang-sub">          Simulan ang Iyong Survey
+</span>
+</span>
+          <span class="lang-arrow" aria-hidden="true">          →
+</span>
+</a>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-row">
+        <span class="footer-label">        Developed by
+</span>
+        <a aria-label="Developed by Aqua Olkite - opens in a new tab" class="footer-logo-link" href="https://aqua.olkite.com/">        <img src="https://i.imgur.com/o7BC5Pn.png" alt="Aqua Olkite logo" />
+</a>
+      </div>
+    </footer>
+  </body>
+</html>
